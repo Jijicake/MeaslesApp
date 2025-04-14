@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Measles Image Classifier - Identify Measles Symptoms from Images</title>
+    <meta name="description" content="Use the Measles Image Classifier tool to upload skin images and check for potential measles symptoms. Educational and informational purposes only.">
+    <meta name="keywords" content="Measles, Image Classifier, Measles Symptoms, Health Tool, Medical, AI, Educational, Skin Images">
+    <meta name="author" content="James Hahne">
+
+    <meta property="og:title" content="Measles Image Classifier - Identify Measles Symptoms from Images">
+    <meta property="og:description" content="Upload a skin image and use the Measles Image Classifier tool to identify potential measles symptoms.">
+    <meta property="og:image" content="path-to-image.jpg"> <!-- Add an actual image path here -->
+    <meta property="og:url" content="https://your-website.com">
+    <meta property="og:type" content="website">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Measles Image Classifier - Identify Measles Symptoms from Images">
+    <meta name="twitter:description" content="Upload a skin image and use the Measles Image Classifier tool to identify potential measles symptoms.">
+    <meta name="twitter:image" content="path-to-image.jpg"> <!-- Add an actual image path here -->
+    <meta name="twitter:site" content="@YourTwitterHandle">
+
+    <link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Add a favicon to improve branding -->
+
+    <style>
+.sample-section {
+    text-align: center;
+    margin-top: 3rem;
+    padding: 2rem;
+    background-color: #fff3cd; /* Light yellow */
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.sample-section h2 {
+    font-size: 2rem;
+    color: #007bff;
+}
+
+.sample-section p {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 1.5rem;
+}
+
+.sample-images {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.sample-image {
+    text-align: center;
+    max-width: 45%;
+}
+
+.sample-image figcaption {
+    font-size: 0.95rem;
+    color: #555;
+    margin-top: 0.5rem;
+}
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            color: #333;
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        form {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        input[type="file"] {
+            margin: 1rem 0;
+        }
+
+        button {
+            padding: 0.6rem 1.5rem;
+            font-size: 1rem;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        .clear-btn {
+            background-color: #dc3545;
+            margin-left: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .clear-btn:hover {
+            background-color: #a71d2a;
+            transform: scale(1.05);
+        }
+
+        button:focus, .clear-btn:focus {
+            outline: 3px solid #ffcc00;
+        }
+
+        .result, .deleted {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .result h2 {
+            color: #28a745;
+        }
+
+        .preview-img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .story-section {
+            margin-top: 3rem;
+            padding: 2rem;
+            background-color: #f0f8ff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        .story-section h2 {
+            font-size: 2rem;
+            color: #007bff;
+        }
+
+        .story-section p {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .story-section a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .story-section a:hover {
+            text-decoration: underline;
+        }
+
+        #disclaimerModal {
+            display: block;
+            position: fixed;
+            z-index: 9999;
+            padding-top: 100px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: auto;
+            padding: 30px;
+            border: 1px solid #888;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .modal-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .modal-button:disabled {
+            background-color: #aaa;
+            cursor: not-allowed;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-size: 0.95rem;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>🦠 Measles Image Classifier</h1>
+            <p>Upload a skin image and let our model help identify if it may show signs of measles. For educational use only.</p>
+        </header>
+
+        <form method="post" enctype="multipart/form-data">
+            <input type="file" name="file" accept="image/*" required>
+            <br>
+            <button type="submit">Upload & Predict</button>
+        </form>
+
+        <form method="post" style="text-align:center;">
+            <input type="hidden" name="clear" value="true">
+            <button type="submit" class="clear-btn">Clear Uploads</button>
+        </form>
+
+        {% if prediction %}
+            <div class="result">
+                <h2>Prediction: {{ prediction }}</h2>
+
+                {% if prediction == 'measles' %}
+                    <p style="color: red; font-weight: bold;">⚠️ This is likely a measles infection, please seek medical attention immediately. This tool is not a substitute for professional diagnosis!</p>
+                {% endif %}
+
+                <img src="{{ url_for('uploaded_file', filename=filename) }}" class="preview-img">
+            </div>
+        {% endif %}
+
+        {% if deleted %}
+            <div class="deleted">
+                <h3>🗑️ Deleted Files:</h3>
+                <ul>
+                {% for file in deleted %}
+                    <li>{{ file }}</li>
+                {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+
+
+    <div style="text-align:center; padding-top: 1.5rem;">
+        <iframe width="854" height="480" src="https://www.youtube.com/embed/JvehOWmDKBI"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
+    </div>
+
+<div class="sample-section">
+    <h2>🖼️ Sample Images</h2>
+    <p>Here are examples of the types of skin images you can upload:</p>
+    <div class="sample-images">
+        <figure class="sample-image">
+            <img src="/static/acne.jpg" alt="Sample acne image" class="preview-img" width="407.5" height="255">
+            <figcaption>Example of acne. <strong>✅ Correctly detected as not measle.</strong> </figcaption>
+        </figure>
+        <figure class="sample-image">
+            <img src="/static/measle.jpg" alt="Sample measles image" class="preview-img" width="418" height="278.67">
+            <figcaption>Example of measles. <strong>✅ Correctly detected as measle.</strong></figcaption>
+        </figure>
+    </div>
+</div>
+
+    <div class="story-section">
+        <h2>💬 My Story</h2>
+        <p>Hi there! I'm James Hahne, and I created this tool as part of my passion for helping others. I made this mainly for measles outbreak in West Texas and while this tool is not a substitute for professional medical advice, I wanted to create an educational way for people to quickly assess symptoms they might encounter. I’m always learning more about AI and health, and this project is just one step on that journey.</p>
+        <p>If you want to learn more or get in touch, feel free to reach out to me at <a href="mailto:james0hahne@gmail.com">james0hahne@gmail.com</a>!</p>
+    </div>
+
+    <!-- Disclaimer Modal -->
+    <div id="disclaimerModal">
+        <div class="modal-content">
+            <h2>⚠️ Disclaimer</h2>
+            <p>This tool is for informational and educational purposes only. It is <strong>not</strong> a substitute for professional medical advice, diagnosis, or treatment. Always consult a healthcare provider.</p>
+
+            <label>
+                <input type="checkbox" id="agreeCheckbox"> I understand and agree to the disclaimer.
+            </label>
+
+            <button class="modal-button" id="continueButton" onclick="closeModal()" disabled>Continue</button>
+        </div>
+    </div>
+
+    <script>
+        if (localStorage.getItem('disclaimerAccepted') === 'true') {
+            document.getElementById('disclaimerModal').style.display = 'none';
+        }
+
+        const checkbox = document.getElementById('agreeCheckbox');
+        const continueButton = document.getElementById('continueButton');
+
+        checkbox.addEventListener('change', function() {
+            continueButton.disabled = !this.checked;
+        });
+
+        function closeModal() {
+            if (checkbox.checked) {
+                localStorage.setItem('disclaimerAccepted', 'true');
+            }
+            document.getElementById('disclaimerModal').style.display = 'none';
+        }
+    </script>
+
+</body>
+</html>
