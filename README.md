@@ -1,5 +1,8 @@
 # MeaslesApp
-[![YouTube](http://i.ytimg.com/vi/lDJlXdsNCYg/hqdefault.jpg)](https://www.youtube.com/watch?v=lDJlXdsNCYg)
+<a href="https://www.youtube.com/watch?v=lDJlXdsNCYg">
+  <img src="http://i.ytimg.com/vi/lDJlXdsNCYg/hqdefault.jpg" width="600" />
+</a>
+
 ![image](https://github.com/user-attachments/assets/56b26ad9-5578-4c2e-9988-42b577d781e9)
 
 
